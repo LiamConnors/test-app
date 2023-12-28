@@ -17,8 +17,11 @@ jobs:
       - name: Run app
         run: |
           python app.py
+      - name: Wait for app to start
+        run: |
           sleep 10
+      - name: Test app
+        run: |
           curl http://127.0.0.1:8050/
-
 
       # Add more steps as needed
