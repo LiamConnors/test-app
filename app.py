@@ -1,24 +1,30 @@
-from dash import Dash, html, dcc, callback, Output, Input
-import plotly.express as px
-import pandas as pd
-
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder_unfiltered.csv')
+from dash import Dash, callback, html, Input, Output, ctx, callback
 
 app = Dash(__name__)
 
 app.layout = html.Div([
-    html.H1(children='Title of Dash App', style={'textAlign':'center'}),
-    dcc.Dropdown(df.country.unique(), 'Canada', id='dropdown-selection'),
-    dcc.Graph(id='graph-content')
+    html.Button('Button 1', id='btn-1'),
+    html.Button('Button 2', id='btn-2'),
+    html.Button('Button 3', id='btn-3'),
+    html.Div(id='container'),
+    html.Div(id='container-no-ctx')
 ])
 
 @callback(
-    Output('graph-content', 'figure'),
-    Input('dropdown-selection', 'value')
-)
-def update_graph(value):
-    dff = df[df.country==value]
-    return px.line(dff, x='year', y='pop')
+    Output('container-no-ctx', 'children'),
+    Input('btn-1', 'n_clicks'),
+    Input('btn-2', 'n_clicks'))
+def update(btn1, btn2):
+    return f'button 1: {btn1} & button 2: {btn2}'
+
+
+@callback(Output('container','children'),
+              Input('btn-1', 'n_clicks'),
+              Input('btn-2', 'n_clicks'),
+              Input('btn-3', 'n_clicks'))
+def display(btn1, btn2, btn3):
+    button_clicked = ctx.triggered_id
+    return f'You last clicked button with ID {button_clicked}'
 
 if __name__ == '__main__':
     app.run(debug=True)
