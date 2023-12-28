@@ -13,13 +13,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         run: |
-          pip install dash plotly pandas
+          pip install dash[testing] plotly pandas
       - name: Run app
         run: |
-          python app.py &
-          sleep 10
-          wait
-          curl http://127.0.0.1:8050/
+          pytest
 
 
       # Add more steps as needed
