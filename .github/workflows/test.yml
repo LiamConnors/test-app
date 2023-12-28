@@ -12,7 +12,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install dependencies
-        run:
+        run: |
           pip install dash plotly pandas
           python app.py
+
       # Add more steps as needed
