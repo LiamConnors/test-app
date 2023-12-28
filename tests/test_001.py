@@ -6,7 +6,7 @@ from dash import html
 def test_001_child_with_0(dash_duo):
     # 3. define your app inside the test function
     app = dash.Dash(__name__)
-    app.layout = html.Div(id="nully-wrapper", children="abx")
+    app.layout = html.Div(id="nully-wrapper", children=0)
     # 4. host the app locally in a thread, all dash server configs could be
     # passed after the first app argument
     dash_duo.start_server(app)
