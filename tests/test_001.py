@@ -6,7 +6,7 @@ from dash import html
 def test_001_child_with_0(dash_duo):
     # 3. define your app inside the test function
     app = dash.Dash(__name__)
-    app.layout = html.Div(id="nully-wrapper", children=0)
+    app.layout = html.Div(id="nully-wrapper", children="abx")
     # 4. host the app locally in a thread, all dash server configs could be
     # passed after the first app argument
     dash_duo.start_server(app)
@@ -17,6 +17,6 @@ def test_001_child_with_0(dash_duo):
     assert dash_duo.find_element("#nully-wrapper").text == "0"
     # 7. to make the checkpoint more readable, you can describe the
     # acceptance criterion as an assert message after the comma.
-    # assert dash_duo.get_logs() == [], "browser console should contain no error"
+    assert dash_duo.get_logs() == [], "browser console should contain no error"
     # 8. visual testing with percy snapshot
     dash_duo.percy_snapshot("test_001_child_with_0-layout")
