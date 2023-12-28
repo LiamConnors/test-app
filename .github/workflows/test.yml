@@ -16,12 +16,9 @@ jobs:
           pip install dash plotly pandas
       - name: Run app
         run: |
-          python app.py
-      - name: Wait for app to start
-        run: |
-          sleep 10
-      - name: Test app
-        run: |
+          python app.py &
+          sleep 10 &
           curl http://127.0.0.1:8050/
+
 
       # Add more steps as needed
