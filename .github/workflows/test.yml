@@ -16,7 +16,7 @@ jobs:
           pip install dash[testing] plotly pandas
       - name: Run app
         run: |
-          pytest --log-cli-level=INFO
+          python -m pytest --log-cli-level=INFO
 
 
       # Add more steps as needed
